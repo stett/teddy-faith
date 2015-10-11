@@ -86,20 +86,21 @@ public class TeddyState : MonoBehaviour
         if (!selectable)
             return;
 
-        Debug.Log("OnMouseDown");
         Player _player = FindObjectOfType<Player>();
-        Highlight();
         if (_player)
         {
-            if (!_player.HasTarget())
+            if (_player.HasTarget())
             {
-                _player.Target = gameObject;
-
-                if (facing == Facing.RIGHT)
-                    state = State.MOVING_RIGHT;
-                else
-                    state = State.MOVING_LEFT;
+                _player.UnTarget();
             }
+
+            Highlight();
+            _player.Target = gameObject;
+
+            if (facing == Facing.RIGHT)
+                state = State.MOVING_RIGHT;
+            else
+                state = State.MOVING_LEFT;
         }
     }
 

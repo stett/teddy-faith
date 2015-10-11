@@ -50,7 +50,7 @@ public class InputManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit) && hit.transform.tag == "TeddyBear")
             {
-                    hit.transform.GetComponent<TeddyState>().SetAsTarget();
+                hit.transform.GetComponent<TeddyState>().SetAsTarget();
             }
             else if (_player.HasTarget())
             {
