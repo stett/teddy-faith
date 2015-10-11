@@ -349,7 +349,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: -.600000024, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children:
   - {fileID: 456306}
@@ -423,7 +423,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.70487976, y: 1.06201339, z: 0}
+  m_LocalPosition: {x: 60.8777466, y: 1.46000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466886}
@@ -511,7 +511,7 @@ MonoBehaviour:
   WALK_SPEAD: 2
   state: 0
   selectable: 1
-  facing: 0
+  facing: 1
   max_living_dist_from_player: 15
 --- !u!135 &13519180
 SphereCollider:
@@ -524,7 +524,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
-  m_Center: {x: 0, y: 1.50999999, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13621390
 CapsuleCollider:
   m_ObjectHideFlags: 1

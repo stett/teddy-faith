@@ -49,11 +49,15 @@ public class TeddyState : MonoBehaviour
         } else if (state == State.MOVING_RIGHT) {
             body.velocity = new Vector3(WALK_SPEAD, body.velocity.y);
             facing = Facing.RIGHT;
+
+            transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
             //_anim.SetBool("isWalking");
 
         } else if (state == State.MOVING_LEFT) {
             body.velocity = new Vector3(-WALK_SPEAD, body.velocity.y);
             facing = Facing.LEFT;
+
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
     }
 
