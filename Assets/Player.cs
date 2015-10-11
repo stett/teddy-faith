@@ -65,11 +65,12 @@ public class Player : MonoBehaviour
         // Check to see if we're grounded
         RaycastHit hit;
         LayerMask mask = 1;//~LayerMask.NameToLayer("Bears");
-        if ((Physics.Raycast(new Ray(transform.position, new Vector3(0.5f, -1.0f)),  out hit, mask) && hit.distance < 0.7f) ||
-            (Physics.Raycast(new Ray(transform.position, new Vector3(0.0f, -1.0f)),  out hit, mask) && hit.distance < 0.7f) ||
-            (Physics.Raycast(new Ray(transform.position, new Vector3(-0.5f, -1.0f)), out hit, mask) && hit.distance < 0.7f)) {
-            if (!_grounded)
+        if ((Physics.Raycast(new Ray(transform.position + new Vector3(0.0f, 0f, 0f), new Vector3(0f, -1.0f)),  out hit, mask) && hit.distance < 0.5f) ||
+            (Physics.Raycast(new Ray(transform.position + new Vector3(0.5f, 0f, 0f), new Vector3(0f, -1.0f)),  out hit, mask) && hit.distance < 0.5f) ||
+            (Physics.Raycast(new Ray(transform.position + new Vector3(-.5f, 0f, 0f), new Vector3(0f, -1.0f)), out hit, mask) && hit.distance < 0.5f)) {
+            if (_jumping && !_grounded)
             {
+                Debug.Log("RYAHI");
                 _animator.SetBool("isJump", false);
                 _jumping = false;
             }
@@ -117,9 +118,12 @@ public class Player : MonoBehaviour
     ////////////////////////////////////////////////////////////////////
     public void Move(float h)  
     {
+        if (_jumping)
+            return;
+
         // set the direction: h>0 --> true || h==0 --> keep value || h<0 false
         //_direction = h > 0 || (h<Single.Epsilon && _direction);
-        if (Mathf.Abs(h) > Single.Epsilon && !_jumping)
+        if (Mathf.Abs(h) > Single.Epsilon)
         {
             _direction = h > Single.Epsilon;
 
@@ -143,12 +147,13 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        StartCoroutine("JumpTrigger");
+        if (!_jumping)
+            StartCoroutine("JumpTrigger");
     }
 
     IEnumerator JumpTrigger()
     {
-        if (_grounded && !_channeling)
+        if (_grounded && !_channeling && !_jumping)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             _animator.SetBool("isJump", true);
