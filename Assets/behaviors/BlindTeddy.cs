@@ -8,6 +8,8 @@ public class BlindTeddy : MonoBehaviour
     public float max_dist_to_player = 6.0f;
     public float trigger_dist_to_player = 4.0f;
 
+    private FollowSelectedTeddy _wisp;
+
     // Use this for initialization
     void Start()
     {
@@ -16,6 +18,8 @@ public class BlindTeddy : MonoBehaviour
         state = GetComponent<TeddyState>();
         player = GameObject.FindObjectOfType<Player>();//GetGame<Player>();
         state.selectable = false;
+
+        _wisp = FindObjectOfType<FollowSelectedTeddy>();
     }
 
     // Update is called once per frame
@@ -36,9 +40,11 @@ public class BlindTeddy : MonoBehaviour
         if (distance > max_dist_to_player)
         {
             state.state = TeddyState.State.WAITING;
+            _wisp.UnSetTarget();
         } 
         else if (distance < trigger_dist_to_player)
         {
+            _wisp.SetTarget(gameObject);
             if (state.facing == TeddyState.Facing.RIGHT)
                 state.state = TeddyState.State.MOVING_RIGHT;
             else

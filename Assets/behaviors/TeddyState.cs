@@ -57,7 +57,7 @@ public class TeddyState : MonoBehaviour
     {
         if (other.tag == "Death")
         {
-            state = State.DEAD;
+            Destroy(gameObject);
         }
     }
 
