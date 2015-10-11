@@ -25,11 +25,14 @@ public class TeddyState : MonoBehaviour
     private Rigidbody body;
     private Player player;
 
+    private Animator _anim;
+
     // Use this for initialization
     void Start()
     {
         body = GetComponent<Rigidbody>();
         player = GameObject.FindObjectOfType<Player>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -46,6 +49,7 @@ public class TeddyState : MonoBehaviour
         } else if (state == State.MOVING_RIGHT) {
             body.velocity = new Vector3(WALK_SPEAD, body.velocity.y);
             facing = Facing.RIGHT;
+            //_anim.SetBool("isWalking");
 
         } else if (state == State.MOVING_LEFT) {
             body.velocity = new Vector3(-WALK_SPEAD, body.velocity.y);
@@ -66,7 +70,6 @@ public class TeddyState : MonoBehaviour
     {
         if (!selectable)
             return;
-
         Player _player = FindObjectOfType<Player>();
         if (_player)
             if (!_player.HasTarget()) Highlight();
@@ -109,6 +112,7 @@ public class TeddyState : MonoBehaviour
     {
         FollowSelectedTeddy wisp = FindObjectOfType<FollowSelectedTeddy>();
         if (wisp) wisp.SetTarget(gameObject);
+        else Debug.Log("no wisp for highlight");
     }
 
     void UnHighlight()
