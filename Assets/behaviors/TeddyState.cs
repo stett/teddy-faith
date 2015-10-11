@@ -57,6 +57,7 @@ public class TeddyState : MonoBehaviour
     {
         if (other.tag == "Death")
         {
+            FindObjectOfType<FollowSelectedTeddy>().UnSetTarget();
             Destroy(gameObject);
         }
     }
