@@ -3,8 +3,16 @@ using System.Collections;
 
 public class TrapDoor : MonoBehaviour {
 
+    public enum Facing
+    {
+        RIGHT,
+        LEFT,
+    };
+
     public Button button;
+    public Facing facing = Facing.RIGHT;
     private BoxCollider box_collider;
+    public float x_additional = 0.0f;
     private float rot_original;
     private float x_original;
 
@@ -19,7 +27,8 @@ public class TrapDoor : MonoBehaviour {
     void Update () {
         //box_collider.enabled = !button.is_pressed;
 
-        float x_targ = (button.is_pressed ? x_original + transform.localScale.x : x_original);
+        float sign = (facing == Facing.RIGHT ? 1.0f : -1.0f);
+        float x_targ = (button.is_pressed ? x_original + sign * (transform.localScale.x + x_additional) : x_original);
         float x = transform.position.x;
         float diff = x_targ - x;
         x += diff * .3f;
