@@ -76,7 +76,6 @@ public class Player : MonoBehaviour
             }
             _grounded = true;
         } else {
-            
             _grounded = false;
         }
 

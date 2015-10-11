@@ -19,7 +19,7 @@ public class BlindTeddy : MonoBehaviour
         player = GameObject.FindObjectOfType<Player>();//GetGame<Player>();
         state.selectable = false;
 
-        _wisp = FindObjectOfType<FollowSelectedTeddy>();
+        _wisp = null;
     }
 
     // Update is called once per frame
@@ -31,6 +31,8 @@ public class BlindTeddy : MonoBehaviour
         state.selectable = false;
         state.facing = TeddyState.Facing.RIGHT;
 
+        if (_wisp == null)
+            _wisp = FindObjectOfType<FollowSelectedTeddy>(); 
 
 
         Ray ray_down = new Ray(transform.position, new Vector3(0.0f, -1.0f));
@@ -40,11 +42,13 @@ public class BlindTeddy : MonoBehaviour
         if (distance > max_dist_to_player)
         {
             state.state = TeddyState.State.WAITING;
-            _wisp.UnSetTarget();
+            if (_wisp)
+                _wisp.UnSetTarget();
         } 
         else if (distance < trigger_dist_to_player)
         {
-            _wisp.SetTarget(gameObject);
+            if (_wisp)
+                _wisp.SetTarget(gameObject);
             if (state.facing == TeddyState.Facing.RIGHT)
                 state.state = TeddyState.State.MOVING_RIGHT;
             else
